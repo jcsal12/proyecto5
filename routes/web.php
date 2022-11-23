@@ -21,11 +21,15 @@ Route::get('encuentro', function () {
     return view('about');
 });
 
-
 Route::get('contact', function () {
     return view('contact');
 });
 
+Route::get('thingsICanDo', function () {
+    return view('thingsICanDo');
+});
+
 Route::get('accomplishments', function () {
     return view('accomplishments');
+
 });
