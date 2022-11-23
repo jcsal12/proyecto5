@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('encuentro', function () {
-    return view('encuentro');
+    return view('about');
 });
 
 Route::get('contact', function () {
@@ -27,4 +27,9 @@ Route::get('contact', function () {
 
 Route::get('thingsICanDo', function () {
     return view('thingsICanDo');
+});
+
+Route::get('accomplishments', function () {
+    return view('accomplishments');
+
 });

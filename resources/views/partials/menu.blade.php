@@ -9,7 +9,7 @@
         <ul>
             <li><a href="/encuentro" class="active">About</a></li>
             <li><a href="/thingsICanDo">Things I Can Do</a></li>
-            <li><a href="#three">A Few Accomplishments</a></li>
+            <li><a href="/accomplishments">A Few Accomplishments</a></li>
             <li><a href="/contact">Contact</a></li>
         </ul>
     </nav>
