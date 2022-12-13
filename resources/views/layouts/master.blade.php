@@ -16,8 +16,8 @@
     </body>
     <footer>
         <div class="columna center">
-          <h4><a href="{{ url('/') }}">Home</a></h4>
-          <h4><a href="{{ url('/servicios') }}">Servicios</a></h4>
+          <h4><a href="/">Home</a></h4>
+          <h4><a href="/servicios">Servicios</a></h4>
           <h4><a href="#">Clientes</a></h4>
           <h4><a href="#">Contacto</a></h4>
         </div>
@@ -29,7 +29,7 @@
           </ul>
         </div>
         <div class="columna center">
-          <img class="logo" src="/assets/img/logo.png" alt="">
+          <img class="logo" src="/assets/img/logoEmpresa.svg" alt="">
         </div>
         <div class="columna">
           <p><b>Aviso Legal y Políticos</b></p>
@@ -48,5 +48,6 @@
           <a href="#"><img class="social-media" src="/assets/img/linkedin.svg" alt=""></a>
         </div>
       </footer>
+      <p>© 2022 - Todos los derechos reservados</p>
 </html>
 
