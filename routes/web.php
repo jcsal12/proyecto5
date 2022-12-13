@@ -17,19 +17,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('encuentro', function () {
-    return view('about');
+Route::get('/servicios', function () {
+    return view('servicios');
 });
 
-Route::get('contact', function () {
-    return view('contact');
+Route::get('/servicios/create', function () {
+    return view('servicioscreate');
 });
 
-Route::get('thingsICanDo', function () {
-    return view('thingsICanDo');
+Route::get('/servicios/show/{id}', function ($id) {
+    return 'Has elegido el servicio '.$id;
 });
 
-Route::get('accomplishments', function () {
-    return view('accomplishments');
-
+Route::get('/servicios/edit/{id}', function ($id) {
+    return 'Vas a editar el servicio '.$id;
 });
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/logout', function () {
+    return view('logout');
+});
+
