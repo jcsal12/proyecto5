@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
@@ -17,17 +18,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class.'@getHome');
 
-Route::get('/contacto', function () {
-    return view('contacto');
-});
 
-Route::get('/servicios', ProductoController::class.'@getIndex');
+Route::get('/contacto', ContactoController::class.'@getIndex');
 
-Route::get('/servicios/create', ProductoController::class.'@getCreate');
+Route::get('/contacto/create', ContactoController::class.'@getCreate');
 
-Route::get('/servicios/show/{id}', ProductoController::class.'@getShow');
+Route::get('/contacto/show/{id}', ContactoController::class.'@getShow');
 
-Route::get('/servicios/edit/{id}', ProductoController::class.'@getEdit');
+Route::get('/contacto/edit/{id}', ContactoController::class.'@getEdit');
+
+Route::post('/contacto', ContactoController::class.'@store');
 
 Route::get('/login', function () {
     return view('login');
@@ -36,4 +36,3 @@ Route::get('/login', function () {
 Route::get('/logout', function () {
     return view('logout');
 });
-
