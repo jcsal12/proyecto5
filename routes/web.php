@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,29 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', HomeController::class.'@getHome');
 
 Route::get('/contacto', function () {
     return view('contacto');
 });
 
-Route::get('/servicios', function () {
-    return view('servicios');
-});
+Route::get('/servicios', ProductoController::class.'@getIndex');
 
-Route::get('/servicios/create', function () {
-    return view('servicioscreate');
-});
+Route::get('/servicios/create', ProductoController::class.'@getCreate');
 
-Route::get('/servicios/show/{id}', function ($id) {
-    return 'Has elegido el servicio '.$id;
-});
+Route::get('/servicios/show/{id}', ProductoController::class.'@getShow');
 
-Route::get('/servicios/edit/{id}', function ($id) {
-    return 'Vas a editar el servicio '.$id;
-});
+Route::get('/servicios/edit/{id}', ProductoController::class.'@getEdit');
 
 Route::get('/login', function () {
     return view('login');
