@@ -1,4 +1,4 @@
 @extends('layouts.master')
 @section('content')
-    <img src="/assets/img/nuevoproducto.png" alt="login">
+    <h1>SE HA CREADO EL USUARIO {{$contacto->nombre}}, {{$contacto->apellidos}}</h1>
 @stop

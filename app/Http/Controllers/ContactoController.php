@@ -16,7 +16,9 @@ class ContactoController extends Controller
 
     public function getShow($id)
     {
-        return 'Has elegido el servicio '.$id;
+        $contacto = Contacto::findOrFail($id);
+        return view('servicioscreate', ['contacto' => $contacto]);
+
     }
 
     public function getCreate()
@@ -37,7 +39,8 @@ class ContactoController extends Controller
         $registronuevo -> email = $request -> input('correo');
         $registronuevo -> consulta = $request -> input('consulta');
         $registronuevo -> save();
-        return redirect('/');
-       return $request->all();
+        $url = action([ContactoController::class, 'getShow'], ['id' => $registronuevo -> id]);
+        return redirect($url);
+        //return $request->all();
     }
 }
