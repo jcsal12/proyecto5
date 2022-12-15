@@ -104,6 +104,12 @@
     transform: scale(1.2);
   }
 
+  .auth{
+      text-decoration: none;
+      color: #ffffff;
+      margin-right: 0%;
+  }
+
 
   /* Estilizando la portada */
   #portada {

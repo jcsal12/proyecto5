@@ -10,4 +10,6 @@
       <div class="RRSS"><a href="#"><img src="/assets/img/twitter.png" alt="twitter"></a></div>
       <div class="RRSS"><a href="#"><img src="/assets/img/linkedin.png" alt="linkedin"></a></div>
     </div>
+    <a class="auth" href="/login">LOGIN</a>
+    <a class="auth" href="/register">REGISTER</a>
 </nav>

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +14,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        self::seedTabla();
+        $this->command->alert('Tabla inicializada con datos!');
+    }
+
+    private function seedTabla(){
+        DB::table('users') ->insert([
+            'name' =>'admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('123456'),
+        ]);
     }
 }
