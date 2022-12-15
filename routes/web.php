@@ -31,11 +31,15 @@ Route::get('/contacto/show/{id}', [ContactoController::class,'getShow']);
 
 Route::get('/contacto/edit/{id}', ContactoController::class.'@getEdit');
 
-Route::post('/contacto', ContactoController::class.'@store');
+//Route::post('/contacto', ContactoController::class.'@store');
 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/contacto', function () {
+    return view('contacto');
+})->middleware(['auth'])->name('contacto');
 
 require __DIR__.'/auth.php';
