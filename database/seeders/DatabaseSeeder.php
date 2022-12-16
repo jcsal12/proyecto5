@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
     }
 
     private function seedTabla(){
+        DB::table('users') -> truncate();
         DB::table('users') ->insert([
             'name' =>'admin',
             'email' => 'admin@admin.com',
