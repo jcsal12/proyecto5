@@ -23,7 +23,9 @@ Route::get('/', function () {
 Route::get('/', HomeController::class.'@getHome');
 
 
-Route::get('/contacto', ContactoController::class.'@getIndex');
+Route::get('/contactos', ContactoController::class.'@getIndex') ->middleware(['auth'])->name('contacto');
+
+Route::get('/contacto', ContactoController::class.'@getContacto') ->middleware(['auth'])->name('contacto');
 
 Route::get('/contacto/create', ContactoController::class.'@getCreate');
 
@@ -31,15 +33,11 @@ Route::get('/contacto/show/{id}', [ContactoController::class,'getShow']);
 
 Route::get('/contacto/edit/{id}', ContactoController::class.'@getEdit');
 
-//Route::post('/contacto', ContactoController::class.'@store');
+Route::post('/contacto', ContactoController::class.'@store');
 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
-Route::get('/contacto', function () {
-    return view('contacto');
-})->middleware(['auth'])->name('contacto');
 
 require __DIR__.'/auth.php';
