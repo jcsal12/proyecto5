@@ -11,7 +11,8 @@ class ContactoController extends Controller
 {
     public function getIndex()
     {
-        return view('contacto');
+        $contactos = Contacto::all();
+        return view('index', ['contactos' => $contactos]);
     }
 
     public function getShow($id)
@@ -21,6 +22,11 @@ class ContactoController extends Controller
 
     }
 
+    public function getContacto()
+    {
+        return view('contacto');
+    }
+
     public function getCreate()
     {
         return view('servicioscreate');
@@ -28,7 +34,8 @@ class ContactoController extends Controller
 
     public function getEdit($id)
     {
-        return 'Vas a editar el contacto '.$id;
+        $contacto = Contacto::findOrFail($id);
+        return view('serviciosedit', ['contacto' => $contacto]);
     }
 
     public function store(Request $request){
@@ -41,6 +48,5 @@ class ContactoController extends Controller
         $registronuevo -> save();
         $url = action([ContactoController::class, 'getShow'], ['id' => $registronuevo -> id]);
         return redirect($url);
-        //return $request->all();
     }
 }
