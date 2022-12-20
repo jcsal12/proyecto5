@@ -1,9 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ContactoController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,27 +14,7 @@ use App\Http\Controllers\ProductoController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return ['Laravel' => app()->version()];
 });
-
-Route::get('/', HomeController::class.'@getHome');
-
-
-Route::get('/contactos', ContactoController::class.'@getIndex') ->middleware(['auth'])->name('contacto');
-
-Route::get('/contacto', ContactoController::class.'@getContacto') ->middleware(['auth'])->name('contacto');
-
-Route::get('/contacto/create', ContactoController::class.'@getCreate');
-
-Route::get('/contacto/show/{id}', [ContactoController::class,'getShow']);
-
-Route::get('/contacto/edit/{id}', ContactoController::class.'@getEdit');
-
-Route::post('/contacto', ContactoController::class.'@store');
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
