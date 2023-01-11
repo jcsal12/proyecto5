@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 use Psr\Http\Message\ServerRequestInterface;
 use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config\Config;
@@ -33,6 +32,11 @@ Route::any('/{any}', function (ServerRequestInterface $request) {
     ]);
     $api = new Api($config);
     $response = $api->handle($request);
+    //Works for React Client
     $records = json_decode($response->getBody()->getContents())->records;
-    return response()->json($records, 200, $headers = ['X-Total-Count' => $records]);
+    return response()->json($records, 200, $headers = ['X-Total-Count' => count($records)]);
+
+    // Works for Api
+     //return $response;
+
 })->where('any', '.*');
