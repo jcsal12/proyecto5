@@ -17,22 +17,10 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $numElementos = $request->input('numElements');
-        $busquedaArray = [
-            'name',
-            'email'
-        ];
 
-        $busquedaFiltroQ = $request->input('filter');
-        $registrosUsuario = User::query();
+        $registros = searchByField(array('name', 'email'), User::class);
 
-        if ($busquedaFiltroQ && array_key_exists('q', $busquedaFiltroQ)){
-            foreach ($busquedaArray as $fieldName) {
-                $registrosUsuario = $registrosUsuario
-                    ->orWhere($fieldName, 'like', '%' .$busquedaFiltroQ['q'] . '%');
-            }
-        }
-
-        return UserResource::collection($registrosUsuario->paginate($numElementos));
+        return UserResource::collection($registros->paginate($numElementos));
     }
 
     /**
