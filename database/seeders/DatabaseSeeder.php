@@ -19,10 +19,18 @@ class DatabaseSeeder extends Seeder
     }
 
     private function seedTabla(){
-        DB::table('users') -> truncate();
+        DB::table('users') -> delete();
         DB::table('users') ->insert([
+            'id' => 1,
             'name' =>'admin',
             'email' => 'admin@admin.com',
+            'password' => bcrypt('123456'),
+        ]);
+
+        DB::table('users') ->insert([
+            'id' => 2,
+            'name' =>'prueba',
+            'email' => 'prueba@prueba.com',
             'password' => bcrypt('123456'),
         ]);
     }
