@@ -31,6 +31,8 @@ Route::apiResource('customers', CustomerController::class)->middleware('auth:san
 
 Route::apiResource('users', UserController::class);
 
+Route::apiResource('orders', OrderController::class);
+
 // emite un nuevo token
 Route::post('tokens', [TokenController::class, 'store']);
 // elimina el token del usuario autenticado
