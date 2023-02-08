@@ -17,8 +17,12 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-        //return CentroResource::collection(Centro::paginate());
-        $response = Http::get('https://api.wallapop.com/api/v3/general/search?keywords=libros');
-        return response()->json(json_decode($response->getBody()->getContents())->search_objects[0]);
+        $urlApi = 'https://api.wallapop.com/api/v3/general/search?keywords=libro+matematicas';
+        $response = Http::get($urlApi);
+        $res = json_decode($response->collect())->search_objects;
+        //return $res;
+        return BookResource::collection($res);
+        //return response()->json(json_decode($response->getBody()->getContents())->search_objects[0]);
+
     }
 }

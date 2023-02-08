@@ -35,7 +35,7 @@ Route::apiResource('users', UserController::class);
 
 Route::apiResource('orders', OrderController::class);
 
-Route::apiResource('books', BookController::class);
+Route::get('books', [BookController::class, 'index']);
 
 
 // emite un nuevo token
