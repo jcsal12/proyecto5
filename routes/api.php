@@ -38,6 +38,8 @@ Route::apiResource('orders', OrderController::class)->middleware('auth:sanctum')
 Route::get('/avatars', [AvatarController::class, 'getAvatar'])->middleware('auth:sanctum');
 Route::post('/avatars', [AvatarController::class, 'store'])->middleware('auth:sanctum');
 
+Route::get('/avatars/{id}', [AvatarController::class, 'getAvatarById']);
+
 // emite un nuevo token
 Route::post('tokens', [TokenController::class, 'store']);
 // elimina el token del usuario autenticado
