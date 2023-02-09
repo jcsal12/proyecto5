@@ -36,9 +36,9 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->truncate();
 
         $userAdmin = User::create([
-            'name' => env('DATABASE_ADMIN'),
-            'email' => env('DATABASE_EMAIL'),
-            'password' => Hash::make(env('DATABASE_PASS')),
+            'name' => env('ADMIN_NAME', 'admin'),
+            'email' => env('ADMIN_EMAIL', 'admin@admin.es'),
+            'password' => Hash::make(env('ADMIN_PASSWORD', '123456')),
             'email_verified_at' => now()
         ]);
 
