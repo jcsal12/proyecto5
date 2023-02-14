@@ -8,6 +8,7 @@ use Tqdev\PhpCrudApi\Config\Config;
 use App\Http\Controllers\API\CustomerController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\TokenController;
+use App\Http\Controllers\API\BookController;
 use App\Http\Controllers\API\AvatarController;
 use App\Http\Controllers\API\OrderController;
 
@@ -39,6 +40,9 @@ Route::get('/avatars', [AvatarController::class, 'getAvatar'])->middleware('auth
 Route::post('/avatars', [AvatarController::class, 'store'])->middleware('auth:sanctum');
 
 Route::get('/avatars/{id}', [AvatarController::class, 'getAvatarById']);
+
+Route::get('books', [BookController::class, 'index']);
+
 
 // emite un nuevo token
 Route::post('tokens', [TokenController::class, 'store']);
