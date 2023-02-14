@@ -17,10 +17,20 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $numElementos = $request->input('numElements');
+        $user = $request->user();
 
-        $registros = searchByField(array('customer', 'amount'), Order::class);
+        $orders = $user->isAdmin()
+        ? Order::all()
+        : $user->customer->orders;
 
-        return OrderResource::collection($registros->paginate($numElementos));
+        // if($user->isAdmin()){
+        //     $orders = Order::all();
+        // }else{
+        //     $orders = $user->customer->orders;
+        // }
+
+        return OrderResource::collection($orders);
+
     }
+
 }

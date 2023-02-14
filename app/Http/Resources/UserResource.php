@@ -23,6 +23,8 @@ class UserResource extends JsonResource
             'attributes' => [
                 'name' => $name,
                 'email' => $this->email,
+                'avatar' => $this->avatar,
+                'roles' => RoleResource::collection($this->roles)
             ]
         ];
     }
