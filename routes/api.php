@@ -11,6 +11,8 @@ use App\Http\Controllers\API\TokenController;
 use App\Http\Controllers\API\BookController;
 use App\Http\Controllers\API\AvatarController;
 use App\Http\Controllers\API\OrderController;
+use App\Http\Controllers\API\LocationController;
+use App\Http\Controllers\API\CategorieController;
 
 
 /*
@@ -42,6 +44,8 @@ Route::post('/avatars', [AvatarController::class, 'store'])->middleware('auth:sa
 Route::get('/avatars/{id}', [AvatarController::class, 'getAvatarById']);
 
 Route::get('books', [BookController::class, 'index']);
+Route::get('locations', [LocationController::class, 'index']);
+Route::get('categories', [CategorieController::class, 'index']);
 
 
 // emite un nuevo token

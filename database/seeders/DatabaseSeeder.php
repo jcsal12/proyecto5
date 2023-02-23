@@ -100,7 +100,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        $userCustomers = User::factory(count($categorias))
+        $userCustomers = User::factory($numUsuarios = 10)
         ->has(Customer::factory()
         ->has(Order::factory()->count(3))
         ->count(1))
@@ -110,22 +110,22 @@ class DatabaseSeeder extends Seeder
             $userCustomer->roles()->attach($roleCustomer->id);
         }
 
-        self::tablaLibros();
+        self::tablaLibros($numUsuarios);
 
         Model::reguard();
         Schema::enableForeignKeyConstraints();
     }
 
-    private static function tablaLibros(){
+    private static function tablaLibros($numUsuarios){
         $categorias = Categorie::all();
         foreach ($categorias as $categoria) {
-            $categoriaName = $categoria->name;
+            $peticion = $categoria->name;
             $categoriaId = $categoria->id;
-            self::getLibros($categoriaName, $categoriaId);
+            self::getLibros($peticion, $categoriaId, $numUsuarios);
         }
     }
 
-    private static function getLibros($peticion, $categoriaId){
+    private static function getLibros($peticion, $categoriaId, $numUsuarios){
         $urlApi = "https://api.wallapop.com/api/v3/general/search?keywords=libros+".$peticion;
         $response = Http::get($urlApi);
         $res = json_decode($response->collect())->search_objects;
@@ -136,7 +136,7 @@ class DatabaseSeeder extends Seeder
                 'price' => $libro->price,
                 'currency' => $libro->currency,
                 'images' => $libro->images[0]->large,
-                'user_id' => $categoriaId+1,
+                'user_id' => rand(3, $numUsuarios),
                 'categorie_id' => $categoriaId,
                 'location_id' => rand(1, 17)
             ]);
