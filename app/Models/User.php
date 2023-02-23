@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Role;
 
 class User extends Authenticatable
 {
@@ -57,15 +58,31 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
     }
 
+    public function rol_customer(){
+        $role = Role::where('name', 'Customer')->first();
+        $this->roles()->attach($role->id);
+    }
+
     public function isAdmin(){
-        $roles = $user->roles;
+        $roles = $this->roles;
         $isAdmin = false;
-        foreach ($roles as $rol) {
-            if($role->name == 'Admin'){
+        foreach ($roles as $role) {
+            if($role->name === 'Admin'){
                 $isAdmin = true;
             }
         }
         return $isAdmin;
+    }
+
+    public function isEditor(){
+        $roles = $this->roles;
+        $isEditor = false;
+        foreach ($roles as $role) {
+            if($role->name === 'Editor'){
+                $isEditor = true;
+            }
+        }
+        return $isEditor;
     }
 
 }

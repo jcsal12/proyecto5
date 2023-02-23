@@ -50,8 +50,20 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now()
         ]);
 
+        $userEditor = User::create([
+            'id' => 2,
+            'name' => 'Editor',
+            'email' => 'editor@editor.es',
+            'password' => Hash::make('123456'),
+            'email_verified_at' => now()
+        ]);
+
         $roleAdmin = Role::create([
             'name' => 'Admin'
+        ]);
+
+        $roleEditor = Role::create([
+            'name' => 'Editor'
         ]);
 
         $roleCustomer = Role::create([
@@ -59,6 +71,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $userAdmin->roles()->attach($roleAdmin->id);
+
+        $userEditor->roles()->attach($roleEditor->id);
 
         $categorias = [
             "matematicas",

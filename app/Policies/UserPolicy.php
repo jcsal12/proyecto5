@@ -2,12 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Customer;
 use App\Models\User;
-use App\Models\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CustomerPolicy
+class UserPolicy
 {
     use HandlesAuthorization;
 
@@ -22,26 +20,14 @@ class CustomerPolicy
         if($user->isAdmin()) return true;
     }
 
-        /**
-     * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\User  $user
-     * @param  string  $ability
-     * @return void|bool
-     */
-    public function before(User $user, $ability)
-    {
-        if($user->isAdmin()) return true;
-    }
-
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Customer $customer)
+    public function view(User $user, User $model)
     {
         if($user->isAdmin()) return true;
     }
@@ -61,10 +47,10 @@ class CustomerPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Customer $customer)
+    public function update(User $user, User $model)
     {
         if($user->isAdmin()) return true;
     }
@@ -73,10 +59,10 @@ class CustomerPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Customer $customer)
+    public function delete(User $user, User $model)
     {
         if($user->isAdmin()) return true;
     }
@@ -85,10 +71,10 @@ class CustomerPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Customer $customer)
+    public function restore(User $user, User $model)
     {
         //
     }
@@ -97,10 +83,10 @@ class CustomerPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Customer $customer)
+    public function forceDelete(User $user, User $model)
     {
         //
     }
