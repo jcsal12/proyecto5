@@ -9,8 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Libros;
+use App\Models\Categorie;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Role;
+use Illuminate\Support\Facades\Http;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,7 +26,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         self::seedTabla();
-        $this->command->alert('Tabla inicializada con datos!');
+        //$this->command->alert('Tabla inicializada con datos!');
     }
 
     private function seedTabla(){
@@ -34,8 +38,12 @@ class DatabaseSeeder extends Seeder
         DB::table('orders')->truncate();
         DB::table('customers')->truncate();
         DB::table('users')->truncate();
+        DB::table('libros')->truncate();
+        DB::table('categories')->truncate();
+        DB::table('locations')->truncate();
 
         $userAdmin = User::create([
+            'id' => 1,
             'name' => env('ADMIN_NAME', 'admin'),
             'email' => env('ADMIN_EMAIL', 'admin@admin.es'),
             'password' => Hash::make(env('ADMIN_PASSWORD', '123456')),
@@ -52,7 +60,47 @@ class DatabaseSeeder extends Seeder
 
         $userAdmin->roles()->attach($roleAdmin->id);
 
-        $userCustomers = User::factory(10)
+        $categorias = [
+            "matematicas",
+            "lengua",
+            "sociales",
+            "biologia",
+            "quimica",
+        ];
+
+        foreach ($categorias as $categoria) {
+            DB::table('categories')->insert([
+                'name' => $categoria,
+            ]);
+        }
+
+        $comunidadesAutonomas = [
+            "Andalucía",
+            "Aragón",
+            "Asturias",
+            "Baleares",
+            "Canarias",
+            "Cantabria",
+            "Castilla y León",
+            "Castilla-La Mancha",
+            "Cataluña",
+            "Comunidad Valenciana",
+            "Extremadura",
+            "Galicia",
+            "Madrid",
+            "Murcia",
+            "Navarra",
+            "País Vasco",
+            "La Rioja",
+        ];
+
+        foreach ($comunidadesAutonomas as $comunidad) {
+            DB::table('locations')->insert([
+                'name' => $comunidad,
+            ]);
+        }
+
+        $userCustomers = User::factory(count($categorias))
         ->has(Customer::factory()
         ->has(Order::factory()->count(3))
         ->count(1))
@@ -62,8 +110,42 @@ class DatabaseSeeder extends Seeder
             $userCustomer->roles()->attach($roleCustomer->id);
         }
 
+        self::tablaLibros();
+
         Model::reguard();
         Schema::enableForeignKeyConstraints();
     }
+
+    private static function tablaLibros(){
+        $categorias = Categorie::all();
+        foreach ($categorias as $categoria) {
+            $categoriaName = $categoria->name;
+            $categoriaId = $categoria->id;
+            self::getLibros($categoriaName, $categoriaId);
+        }
+    }
+
+    private static function getLibros($peticion, $categoriaId){
+        $urlApi = "https://api.wallapop.com/api/v3/general/search?keywords=libros+".$peticion;
+        $response = Http::get($urlApi);
+        $res = json_decode($response->collect())->search_objects;
+        foreach ($res as $libro) {
+            Libros::create([
+                'title' => $libro->title,
+                'description' => $libro->description,
+                'price' => $libro->price,
+                'currency' => $libro->currency,
+                'images' => $libro->images[0]->large,
+                'user_id' => $categoriaId+1,
+                'categorie_id' => $categoriaId,
+                'location_id' => rand(1, 17)
+            ]);
+        }
+    }
+
+
+
 }
+
+
 
