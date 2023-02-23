@@ -47,6 +47,8 @@ Route::get('/google-callback', function () {
             'password' => Hash::make('123456')
         ]);
 
+        $userNew->rol_customer();
+
         Auth::login($userNew);
 
     }
