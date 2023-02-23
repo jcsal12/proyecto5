@@ -19,7 +19,7 @@ class CustomerPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->id === 1) return true;
+        if($user->isAdmin()) return true;
     }
 
         /**
@@ -31,7 +31,7 @@ class CustomerPolicy
      */
     public function before(User $user, $ability)
     {
-        if($user->id === 1) return true;
+        if($user->isAdmin()) return true;
     }
 
     /**
@@ -43,8 +43,7 @@ class CustomerPolicy
      */
     public function view(User $user, Customer $customer)
     {
-        // return $user->id === $customer->user_id;
-        return true;
+        if($user->isAdmin()) return true;
     }
 
     /**
@@ -55,7 +54,7 @@ class CustomerPolicy
      */
     public function create(User $user)
     {
-        return $user->id === 1;
+        if($user->isAdmin()) return true;
     }
 
     /**
@@ -67,7 +66,7 @@ class CustomerPolicy
      */
     public function update(User $user, Customer $customer)
     {
-        return $user->id === 1;
+        if($user->isAdmin()) return true;
     }
 
     /**
@@ -79,7 +78,7 @@ class CustomerPolicy
      */
     public function delete(User $user, Customer $customer)
     {
-        //
+        if($user->isAdmin()) return true;
     }
 
     /**
