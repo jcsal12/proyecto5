@@ -38,14 +38,18 @@ Route::apiResource('users', UserController::class)->middleware('auth:sanctum');
 
 Route::apiResource('orders', OrderController::class)->middleware('auth:sanctum');
 
+Route::apiResource('books', BookController::class);
+
+Route::apiResource('locations', LocationController::class);
+
+Route::apiResource('categories', CategorieController::class);
+
 Route::get('/avatars', [AvatarController::class, 'getAvatar'])->middleware('auth:sanctum');
 Route::post('/avatars', [AvatarController::class, 'store'])->middleware('auth:sanctum');
 
 Route::get('/avatars/{id}', [AvatarController::class, 'getAvatarById']);
 
-Route::get('books', [BookController::class, 'index']);
-Route::get('locations', [LocationController::class, 'index']);
-Route::get('categories', [CategorieController::class, 'index']);
+
 
 
 // emite un nuevo token

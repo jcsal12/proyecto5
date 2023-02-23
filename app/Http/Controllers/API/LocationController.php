@@ -18,8 +18,38 @@ class LocationController extends Controller
     {
         $numElementos = $request->input('numElements');
 
-        $registros = searchByField(array('first_name', 'last_name', 'job_title', 'city', 'country'), Location::class);
+        $registros = searchByField(array('name'), Location::class);
 
         return LocationResource::collection($registros->paginate($numElementos));
     }
+
+    public function store(Request $request)
+    {
+
+        $location = json_decode($request->getContent(), true);
+
+        $location = Location::create($location['data']['attributes']);
+
+        return new LocationResource($location);
+    }
+
+    public function show(Location $location)
+    {
+        return new LocationResource($location);
+    }
+
+    public function update(Request $request, Location $location)
+    {
+        $locationData = json_decode($request->getContent(), true);
+        $location->update($locationData['data']['attributes']);
+
+        return new LocationResource($location);
+    }
+
+    public function destroy(Location $location)
+    {
+        $location->delete();
+    }
 }
+
+

@@ -22,4 +22,32 @@ class CategorieController extends Controller
 
         return CategorieResource::collection($registros->paginate($numElementos));
     }
+
+    public function store(Request $request)
+    {
+
+        $category = json_decode($request->getContent(), true);
+
+        $category = Categorie::create($category['data']['attributes']);
+
+        return new CategorieResource($category);
+    }
+
+    public function show(Categorie $category)
+    {
+        return new CategorieResource($category);
+    }
+
+    public function update(Request $request, Categorie $category)
+    {
+        $categoryData = json_decode($request->getContent(), true);
+        $category->update($categoryData['data']['attributes']);
+
+        return new CategorieResource($category);
+    }
+
+    public function destroy(Categorie $category)
+    {
+        $category->delete();
+    }
 }
