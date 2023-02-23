@@ -51,7 +51,7 @@ Route::get('/google-callback', function () {
 
     }
 
-    return redirect('/dashboard/users');
+    return redirect('/dashboard');
 });
 
 require __DIR__.'/auth.php';
