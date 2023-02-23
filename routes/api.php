@@ -32,7 +32,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::apiResource('customers', CustomerController::class)->middleware('auth:sanctum');
 
-Route::apiResource('users', UserController::class);
+Route::apiResource('users', UserController::class)->middleware('auth:sanctum');
 
 Route::apiResource('orders', OrderController::class)->middleware('auth:sanctum');
 
