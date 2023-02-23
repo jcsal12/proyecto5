@@ -18,11 +18,11 @@ class BookController extends Controller
     public function index(Request $request)
     {
 
-        $urlApi = 'https://api.wallapop.com/api/v3/general/search?keywords=libros+matematicas';
-        $response = Http::get($urlApi);
-        $res = json_decode($response->collect())->search_objects;
+        $numElementos = $request->input('numElements');
+
+        $registros = searchByField(array('title', 'description', 'price'), Libros::class);
         //return $res;
-        return BookResource::collection($res);
+        return BookResource::collection($registros->paginate($numElementos));
         //return response()->json(json_decode($response->getBody()->getContents())->search_objects[0]);
 
     }
