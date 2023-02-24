@@ -40,9 +40,9 @@ Route::apiResource('orders', OrderController::class)->middleware('auth:sanctum')
 
 Route::apiResource('books', BookController::class)->middleware('auth:sanctum');
 
-Route::apiResource('locations', LocationController::class);
+Route::apiResource('locations', LocationController::class)->middleware('auth:sanctum');
 
-Route::apiResource('categories', CategorieController::class);
+Route::apiResource('categories', CategorieController::class)->middleware('auth:sanctum');
 
 Route::get('/avatars', [AvatarController::class, 'getAvatar'])->middleware('auth:sanctum');
 Route::post('/avatars', [AvatarController::class, 'store'])->middleware('auth:sanctum');
