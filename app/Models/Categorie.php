@@ -14,4 +14,11 @@ class Categorie extends Model
         'name',
     ];
 
+    //devolver los libros asociados a una categoría determinada.
+    public function libros()
+    {
+        return $this->hasMany(Libros::class, 'categorie_id');
+    }
+
+
 }
