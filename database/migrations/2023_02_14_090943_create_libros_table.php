@@ -20,7 +20,7 @@ class CreateLibrosTable extends Migration
             $table->text('description');
             $table->string('price');
             $table->string('currency');
-            $table->string('images')->nullable;
+            $table->string('images')->nullable();
         });
     }
 

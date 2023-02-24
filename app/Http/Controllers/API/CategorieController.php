@@ -48,6 +48,6 @@ class CategorieController extends Controller
 
     public function destroy(Categorie $category)
     {
-        $category->delete();
+        //
     }
 }

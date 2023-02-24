@@ -38,7 +38,7 @@ Route::apiResource('users', UserController::class)->middleware('auth:sanctum');
 
 Route::apiResource('orders', OrderController::class)->middleware('auth:sanctum');
 
-Route::apiResource('books', BookController::class);
+Route::apiResource('books', BookController::class)->middleware('auth:sanctum');
 
 Route::apiResource('locations', LocationController::class);
 
