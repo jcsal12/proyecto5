@@ -30,7 +30,7 @@ class CategoriePolicy
      */
     public function view(User $user, Categorie $categorie)
     {
-        return true;
+        if($user->isAdmin() || $user->isEditor()) return true;
     }
 
     /**
