@@ -12,7 +12,7 @@ class BookController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Libros::class, 'books');
+         $this->authorizeResource(Libros::class, 'book');
     }
     /**
      * Display a listing of the resource.

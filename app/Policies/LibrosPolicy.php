@@ -6,7 +6,7 @@ use App\Models\Libros;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class BookPolicy
+class LibrosPolicy
 {
     use HandlesAuthorization;
 
@@ -18,7 +18,7 @@ class BookPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class BookPolicy
      */
     public function view(User $user, Libros $libros)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class BookPolicy
      */
     public function create(User $user)
     {
-        //
+        if($user->isAdmin() || $user->isEditor()) return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class BookPolicy
      */
     public function update(User $user, Libros $libros)
     {
-        //
+        if($user->isAdmin() || $user->isEditor()) return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class BookPolicy
      */
     public function delete(User $user, Libros $libros)
     {
-        //
+        if($user->isAdmin()) return true;
     }
 
     /**

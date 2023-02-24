@@ -9,6 +9,10 @@ use App\Models\Location;
 
 class LocationController extends Controller
 {
+    public function __construct()
+    {
+         $this->authorizeResource(Location::class, 'location');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -48,7 +52,7 @@ class LocationController extends Controller
 
     public function destroy(Location $location)
     {
-       //
+       $location->delete();
     }
 }
 

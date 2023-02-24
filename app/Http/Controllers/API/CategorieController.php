@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class CategorieController extends Controller
 {
+
+    public function __construct()
+    {
+         $this->authorizeResource(Categorie::class, 'category');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +23,7 @@ class CategorieController extends Controller
     {
         $numElementos = $request->input('numElements');
 
-        $registros = searchByField(array('first_name', 'last_name', 'job_title', 'city', 'country'), Categorie::class);
+        $registros = searchByField(array('name'), Categorie::class);
 
         return CategorieResource::collection($registros->paginate($numElementos));
     }
@@ -48,6 +53,6 @@ class CategorieController extends Controller
 
     public function destroy(Categorie $category)
     {
-        //
+        $category->delete();
     }
 }
