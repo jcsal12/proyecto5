@@ -30,7 +30,7 @@ class LibrosPolicy
      */
     public function view(User $user, Libros $libros)
     {
-        return true;
+        if($user->isAdmin() || $user->isEditor()) return true;
     }
 
     /**

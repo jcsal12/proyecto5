@@ -30,7 +30,7 @@ class LocationPolicy
      */
     public function view(User $user, Location $location)
     {
-        return true;
+        if($user->isAdmin() || $user->isEditor()) return true;
     }
 
     /**
