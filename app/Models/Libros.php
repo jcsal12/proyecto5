@@ -17,4 +17,23 @@ class Libros extends Model
         'currency',
         'images',
     ];
+
+    /**
+     * Devolver el usuario asociado.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function categories()
+    {
+        return $this->belongsTo(Categorie::class, 'categorie_id');
+    }
+
+    public function locations()
+    {
+        return $this->belongsTo(Location::class, 'location_id');
+    }
+
 }

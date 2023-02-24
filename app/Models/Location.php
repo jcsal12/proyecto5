@@ -13,4 +13,9 @@ class Location extends Model
         'id',
         'name'
     ];
+
+    public function libros()
+    {
+        return $this->hasMany(Libros::class, 'location_id');
+    }
 }
