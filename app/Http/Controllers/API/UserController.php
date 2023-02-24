@@ -9,10 +9,9 @@ use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
-
     public function __construct()
     {
-        $this->authorizeResource(Customer::class, 'customer');
+        $this->authorizeResource(User::class, 'user');
     }
     /**
      * Display a listing of the resource.

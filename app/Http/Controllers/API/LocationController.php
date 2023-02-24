@@ -48,7 +48,7 @@ class LocationController extends Controller
 
     public function destroy(Location $location)
     {
-        $location->delete();
+       //
     }
 }
 

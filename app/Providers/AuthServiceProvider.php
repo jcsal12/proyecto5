@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-
+use App\Models\Libros;
+use App\Policies\BookPolicy;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -14,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-        Customer::class => CustomerPolicy::class,
+        Libros::class => BookPolicy::class,
     ];
 
     /**

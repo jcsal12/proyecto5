@@ -10,6 +10,10 @@ use App\Http\Resources\BookResource;
 
 class BookController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Libros::class, 'books');
+    }
     /**
      * Display a listing of the resource.
      *
